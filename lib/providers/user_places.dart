@@ -1,7 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '/models/place.dart';
 
-class UserPlacesNotifier extends StateNotifier {
+class UserPlacesNotifier extends StateNotifier<List<Place>> {
   UserPlacesNotifier() : super(const []);
 
   void addPlace(String title) {
@@ -10,6 +10,7 @@ class UserPlacesNotifier extends StateNotifier {
   }
 }
 
-final userPlacesNotifier = StateNotifierProvider(
+final userPlacesNotifier =
+    StateNotifierProvider<UserPlacesNotifier, List<Place>>(
   (ref) => UserPlacesNotifier(),
 );
