@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import '/screens/places_list_screen.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 final colorScheme = ColorScheme.fromSeed(
@@ -38,9 +38,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Great Places',
       theme: theme,
-      home: Center(
-        child: Text('Great Places Home'),
-      ),
+      home: PlacesListScreen(),
     );
   }
 }
