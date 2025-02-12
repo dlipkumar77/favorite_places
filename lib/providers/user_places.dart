@@ -1,0 +1,15 @@
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import '/models/place.dart';
+
+class UserPlacesNotifier extends StateNotifier {
+  UserPlacesNotifier() : super(const []);
+
+  void addPlace(String title) {
+    final newPlace = Place(title: title);
+    state = [newPlace, ...state];
+  }
+}
+
+final userPlacesNotifier = StateNotifierProvider(
+  (ref) => UserPlacesNotifier(),
+);
