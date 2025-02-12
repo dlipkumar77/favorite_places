@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '/widgets/places_list.dart';
+import '/screens/add_place.dart';
 
 class PlacesListScreen extends StatelessWidget {
   const PlacesListScreen({super.key});
@@ -11,7 +12,13 @@ class PlacesListScreen extends StatelessWidget {
         backgroundColor: Theme.of(context).colorScheme.onSecondary,
         actions: [
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (ctx) => AddPlaceScreen(),
+                ),
+              );
+            },
             icon: Icon(Icons.add),
           )
         ],
