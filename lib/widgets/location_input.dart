@@ -1,7 +1,7 @@
-import 'dart:convert';
+//import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:location/location.dart';
-import 'package:http/http.dart' as http;
+//import 'package:location/location.dart';
+//import 'package:http/http.dart' as http;
 import '/models/place.dart';
 
 class LocationInput extends StatefulWidget {
@@ -17,8 +17,21 @@ class _LocationInputState extends State<LocationInput> {
   PlaceLocation? _pickLocation;
   var _isGettingLocation = false;
 
-  // map snapshot url -> google map static api; remove unwanted & one markers enough others delete; signature too
+  //static value  dont have  google API
+  void _getCurrentLocation() {
+    setState(() {
+      final lat = 40.714232;
+      final lng = -73.9612889;
+      final address = '277 Bedford Avenue, Brooklyn, NY 11211, USA';
+      _pickLocation =
+          PlaceLocation(latitude: lat, longitude: lng, address: address);
+    });
 
+    widget.onSelectLoaction(_pickLocation!);
+  }
+
+  /*
+  // map snapshot url -> google map static api; remove unwanted & one markers enough others delete; signature too
   String get locationImage {
     if (_pickLocation == null) {
       return '';
@@ -29,6 +42,7 @@ class _LocationInputState extends State<LocationInput> {
     return 'https://maps.googleapis.com/maps/api/staticmap?center=$lat,$lng&zoom=16&size=600x300&maptype=roadmap&markers=color:red%7Clabel:S%7C4$lat,$lng&key=YOUR_API_KEY';
   }
 
+  
   void _getCurrentLocation() async {
     Location location = Location();
 
@@ -84,6 +98,8 @@ class _LocationInputState extends State<LocationInput> {
     //print(locationData.longitude);
   }
 
+  */
+
   @override
   Widget build(BuildContext context) {
     Widget previewContent = Text(
@@ -93,6 +109,10 @@ class _LocationInputState extends State<LocationInput> {
             color: Theme.of(context).colorScheme.onSurface,
           ),
     );
+
+/*
+hide these because API key dont have
+
     if (_pickLocation != null) {
       previewContent = Image.network(
         locationImage,
@@ -101,6 +121,8 @@ class _LocationInputState extends State<LocationInput> {
         height: double.infinity,
       );
     }
+
+    */
 
     if (_isGettingLocation) {
       previewContent = CircularProgressIndicator();
