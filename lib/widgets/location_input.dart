@@ -16,6 +16,18 @@ class _LocationInputState extends State<LocationInput> {
   PlaceLocation? _pickLocation;
   var _isGettingLocation = false;
 
+  // map snapshot url -> google map static api; remove unwanted & one markers enough others delete; signature too
+
+  String get locationImage {
+    if (_pickLocation == null) {
+      return '';
+    }
+    final lat = _pickLocation!.latitude;
+    final lng = _pickLocation!.longitude;
+
+    return 'https://maps.googleapis.com/maps/api/staticmap?center=$lat,$lng&zoom=16&size=600x300&maptype=roadmap&markers=color:red%7Clabel:S%7C4$lat,$lng&key=YOUR_API_KEY';
+  }
+
   void _getCurrentLocation() async {
     Location location = Location();
 
@@ -78,6 +90,15 @@ class _LocationInputState extends State<LocationInput> {
             color: Theme.of(context).colorScheme.onSurface,
           ),
     );
+    if (_pickLocation != null) {
+      previewContent = Image.network(
+        locationImage,
+        fit: BoxFit.cover,
+        width: double.infinity,
+        height: double.infinity,
+      );
+    }
+
     if (_isGettingLocation) {
       previewContent = CircularProgressIndicator();
     }
