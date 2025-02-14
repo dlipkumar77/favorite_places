@@ -1,8 +1,8 @@
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:location/location.dart';
 import 'package:http/http.dart' as http;
+import '/models/place.dart';
 
 class LocationInput extends StatefulWidget {
   const LocationInput({super.key});
@@ -13,7 +13,7 @@ class LocationInput extends StatefulWidget {
 }
 
 class _LocationInputState extends State<LocationInput> {
-  Location? _pickLocation;
+  PlaceLocation? _pickLocation;
   var _isGettingLocation = false;
 
   void _getCurrentLocation() async {
@@ -46,6 +46,11 @@ class _LocationInputState extends State<LocationInput> {
     locationData = await location.getLocation();
     final lat = locationData.latitude;
     final lng = locationData.longitude;
+    if (lat == null || lng == null) {
+      return;
+    }
+
+    // optional or must use error handler to response
 
     final url = Uri.parse(
         'https://maps.googleapis.com/maps/api/geocode/json?$lat,$lng&key=YOUR_API_KEY');
@@ -55,6 +60,8 @@ class _LocationInputState extends State<LocationInput> {
     final address = resData['results'][0]['formatted_address'];
 
     setState(() {
+      _pickLocation =
+          PlaceLocation(latitude: lat, longitude: lng, address: address);
       _isGettingLocation = false;
     });
 
